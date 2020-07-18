@@ -1,3 +1,8 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+
+register_user:
+  path: /register
+  controller: App\Controller\UserController::register

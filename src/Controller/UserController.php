@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Users;
+use http\Env\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class UserController extends AbstractController
 {
@@ -29,23 +29,46 @@ class UserController extends AbstractController
      */
 
     /**
-     * @Route("api/register")
-     *
-     * @param Request $request
+     * @Route("/register", name="register_user")
+     * @param Request
      * @return JsonResponse
      */
     public function register(Request $request): JsonResponse{
 
         //$entityManager = $this->getDoctrine()->getManager();
 
-        $name = $request->request->get('name');
+        $body  = $request->getContent();
+        $data = json_decode($body , true );
+        $name= $data['name'];
+        $firstname = $data['firstname'];
+        $email = $data['email'];
+        $password = $data['password'];
+        $user = [
+            'name' => $data['name'],
+            'firstname' => $data['firstname'] ,
+            'email' => $data['email'],
+            'password' => $data['password']];
 
-        if($name == 'fabrizio'){
-            return new JsonResponse('welcome fabrizio');
+
+        if($user['name'] && $user['firstname'] && $user['email'] && $user['password'] ) {
+            if (!empty($user['name']) && !empty($user['firstname']) && !empty($user['email']) && !empty($user['password'])) {
+                foreach ($user as $key => $value){
+                    if($user[$key] == " "){
+                        $user[$key] = "";
+                    }
+                }
+                return new JsonResponse(['reponse'=> true, $user]);
+            } else {
+                return new JsonResponse(['reponse'=> false]);
+            }
+
         }
         else {
-            return new JsonResponse('welcome inconnu !');
+            return new JsonResponse(['reponse'=> false]);
         }
+
+
+
     }
 
 

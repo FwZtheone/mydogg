@@ -54,8 +54,11 @@
             checkForm: function(e){
                 if(this.name && this.firstname && this.email && this.password){
                     console.log(`nom : ${this.name}   prenom : ${this.firstname}   email : ${this.email}   password : ${this.password} `);
-                    axios.post('http://localhost:8000/api/register', {
-                      name: this.name
+                    axios.post('http://localhost:8000/register', {
+                      name: this.name,
+                        firstname : this.firstname,
+                        email : this.email,
+                        password : this.password
                     })
                             .then( (data) =>{
                                 console.log(data);
