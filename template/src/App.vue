@@ -1,28 +1,44 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HomeComponent/>
+    <div class="container-connexion">
+      <RegisterComponent />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import HomeComponent from "./components/HomeComponent";
+  import RegisterComponent from "./components/RegisterComponent";
+  export default {
+    name: 'App',
+    components: {
+      RegisterComponent,
+      HomeComponent
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+    }
   }
-}
 </script>
 
 <style>
-#app {
+  #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+
 }
+  body{
+    font-size: 30px;
+    margin: 0;
+  }
+
+
+  .container-connexion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 700px;
+  }
 </style>
